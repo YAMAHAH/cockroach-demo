@@ -1,7 +1,6 @@
 package com.qksoft.cockroachdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
 
@@ -30,7 +29,6 @@ public class AccountItem {
     public AccountItem(int id, int balance) {
         this.setId(id);
         this.setBalance(balance);
-
     }
 
     public AccountItem(int id, int balance, Account account) {

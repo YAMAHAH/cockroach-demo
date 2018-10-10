@@ -4,6 +4,7 @@ import com.qksoft.cockroachdemo.model.Account;
 import com.qksoft.cockroachdemo.model.AccountItem;
 import com.qksoft.cockroachdemo.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Service
 public class AccountService {
+
+    @Value("${spring.datasource.username}")
+    private String userName;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -30,11 +34,11 @@ public class AccountService {
         };
         account2.setAccountItems(Arrays.asList(accountItems2));
 
-        AccountItem[] accountItems3 = {
-                new AccountItem(11, 500),
-                new AccountItem(12, 600),
-        };
         Account account3 = new Account(7, 1700);
+        AccountItem[] accountItems3 = {
+                new AccountItem(11, 500,account3),
+                new AccountItem(12, 600,account3),
+        };
         account3.getAccountItems().addAll(Arrays.asList(accountItems3));
         Account[] accounts = {account1, account2,account3 };
 
