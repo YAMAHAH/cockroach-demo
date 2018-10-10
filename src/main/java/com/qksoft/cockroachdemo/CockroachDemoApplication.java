@@ -9,13 +9,17 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class CockroachDemoApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-
-        SpringApplication.run(CockroachDemoApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(CockroachDemoApplication.class);
+        springApplication.addListeners(new ApplicationStartup());
+        springApplication.run(args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(CockroachDemoApplication.class);
     }
-
 }
+
+
+
+

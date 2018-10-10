@@ -1,5 +1,6 @@
 package com.qksoft.cockroachdemo.controller;
 
+import com.qksoft.cockroachdemo.FlywayProperties;
 import com.qksoft.cockroachdemo.model.Account;
 import com.qksoft.cockroachdemo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,12 @@ public class AccountController {
         accountService.init();
     }
 
+    @Autowired
+    FlywayProperties flywayProp;
 
     @GetMapping("searchAll")
     public List<Account> searchAll(){
+
         return this.accountService.searchAll();
     }
 

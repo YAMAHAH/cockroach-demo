@@ -1,7 +1,7 @@
 package com.qksoft.cockroachdemo.service;
 
 import com.qksoft.cockroachdemo.model.Account;
-import com.qksoft.cockroachdemo.model.AccountDetail;
+import com.qksoft.cockroachdemo.model.AccountItem;
 import com.qksoft.cockroachdemo.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,22 +17,26 @@ public class AccountService {
 
     public void init() {
 
-        Account account1 = new Account(2, 1500);
-        Account account2 = new Account(3, 1600);
-        AccountDetail[] accountItems = {
-                new AccountDetail(1, 500,account1),
-                new AccountDetail(2, 600,account1),
+        Account account1 = new Account(4, 1500);
+        Account account2 = new Account(5, 1600);
+        AccountItem[] accountItems = {
+                new AccountItem(5, 500,account1),
+                new AccountItem(6, 600,account1),
         };
         account1.setAccountItems(Arrays.asList(accountItems));
-        AccountDetail[] accountItems2 = {
-                new AccountDetail(3, 100,account2),
-                new AccountDetail(4, 200,account2),
+        AccountItem[] accountItems2 = {
+                new AccountItem(7, 100,account2),
+                new AccountItem(8, 200,account2),
         };
         account2.setAccountItems(Arrays.asList(accountItems2));
-        Account[] accounts = {account1, account2
-                //  new Account(2, 1500, Arrays.asList(accountItems)),
-                // new Account(3, 1600, Arrays.asList(accountItems2))
+
+        AccountItem[] accountItems3 = {
+                new AccountItem(11, 500),
+                new AccountItem(12, 600),
         };
+        Account account3 = new Account(7, 1700);
+        account3.getAccountItems().addAll(Arrays.asList(accountItems3));
+        Account[] accounts = {account1, account2,account3 };
 
         accountRepository.saveAll(Arrays.asList(accounts));
     }
