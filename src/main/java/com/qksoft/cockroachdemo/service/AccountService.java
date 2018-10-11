@@ -42,6 +42,7 @@ public class AccountService {
         account3.getAccountItems().addAll(Arrays.asList(accountItems3));
         Account[] accounts = {account1, account2,account3 };
 
+
         accountRepository.saveAll(Arrays.asList(accounts));
     }
 

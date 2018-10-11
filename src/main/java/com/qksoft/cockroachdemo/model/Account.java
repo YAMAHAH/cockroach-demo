@@ -1,5 +1,7 @@
 package com.qksoft.cockroachdemo.model;
 
+import com.qksoft.cockroachdemo.model.Listener.AccountPersistListener;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
     @Table(name = "accounts"
            // ,uniqueConstraints = {@UniqueConstraint(columnNames="id")}
             )
+    @EntityListeners(AccountPersistListener.class)
     public class Account {
         @Id
         @Column(name = "id",unique = true, nullable=false)
