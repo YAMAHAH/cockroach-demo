@@ -1,34 +1,42 @@
 package com.qksoft.cockroachdemo.model;
 
 import com.qksoft.cockroachdemo.model.Listener.AccountPersistListener;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-    @Entity
+    @Entity()
+    @DynamicInsert
+    @DynamicUpdate
     @Table(name = "accounts"
            // ,uniqueConstraints = {@UniqueConstraint(columnNames="id")}
             )
     @EntityListeners(AccountPersistListener.class)
+//    @GeneratedValue(generator = "snowFlakeId")
+    @GenericGenerator(name = "snowFlakeId", strategy = "com.qksoft.cockroachdemo.Sequence.SnowflakeId")
     public class Account {
         @Id
+       // @GeneratedValue(generator = "snowFlakeId")
         @Column(name = "id",unique = true, nullable=false)
-        private long id;
+        private Long id;
 
-        @Column(name = "balance")
-        private long balance;
+        @Column(name = "balance" )
+        private Long balance = null;
 
-        @OneToMany( cascade = CascadeType.ALL ,mappedBy = "account")
+        @OneToMany( cascade = CascadeType.ALL ,mappedBy = "account",orphanRemoval = true)
         private List<AccountItem> accountItems = new ArrayList<>();
 
         // Convenience constructor.
-        public Account(int id, int balance) {
+        public Account(Long id, Long balance) {
             this.setId(id);
             this.setBalance(balance);
         }
 
-        public Account(int id, int balance, List<AccountItem> items) {
+        public Account(Long id, Long balance, List<AccountItem> items) {
             this.setId(id);
             this.setBalance(balance);
             this.setAccountItems(items);
@@ -46,19 +54,19 @@ import java.util.List;
             this.accountItems = accountItems;
         }
 
-        public long getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(long id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
-        public long getBalance() {
+        public Long getBalance() {
             return balance;
         }
 
-        public void setBalance(long balance) {
+        public void setBalance(Long balance) {
             this.balance = balance;
         }
     }

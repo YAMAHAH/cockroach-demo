@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

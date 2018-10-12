@@ -23,9 +23,9 @@ public class CockroachDemoApplication extends SpringBootServletInitializer {
         properties.load(inputStream);
         springApplication.setDefaultProperties(properties);
 
-//        Map<String,Object> defaultProps = new HashMap<>();
-//        defaultProps.put("spring.jpa.show-sql",false);
-//        springApplication.setDefaultProperties(defaultProps);
+        Map<String,Object> defaultProps = new HashMap<>();
+        defaultProps.put("spring.jpa.show-sql",false);
+        springApplication.setDefaultProperties(defaultProps);
         springApplication.run(args);
     }
 
